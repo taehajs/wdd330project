@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Movie Recommendation App</title>
+  <meta name="description" content="A movie recommendation app using TMDB and OMDb APIs. Search, discover, and save your favorite movies.">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+</head>
+
+<body>
+
+  <header>
+    <h1>🎬 Movie Recommendation App</h1>
+  </header>
+
+  <main>
+    <section class="search-box">
+      <input type="text" id="movieInput" placeholder="Enter movie title" aria-label="Movie search input">
+      <button id="searchBtn">Search</button>
+      <button id="randomBtn">Random Recommendation</button>
+      <button id="favoritesBtn">Show Favorites</button>
+    </section>
+
+    <section id="result" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <p>Movie data provided by TMDB and OMDb APIs.</p>
+  </footer>
+
+  <script type="module" src="script.js"></script>
+</body>
+</html>
