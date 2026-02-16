@@ -1,4 +1,5 @@
-import { addFavorite } from './storage.js';
+import { addFavorite, getFavorites } from './storage.js';
+import { truncateText, formatDate, getPosterUrl } from './utils.js';
 
 export function renderMovie(movie, container, extra = null) {
   if (!movie) {
@@ -10,12 +11,11 @@ export function renderMovie(movie, container, extra = null) {
   card.className = 'movie-card animate__animated animate__fadeIn';
 
   card.innerHTML = `
-    <img src="https://image.tmdb.org/t/p/w200${movie.poster_path}" alt="${movie.title}">
+    <img src="${getPosterUrl(movie.poster_path)}" alt="${movie.title}">
     <h3>${movie.title}</h3>
-    <p>Release Date: ${movie.release_date || 'N/A'}</p>
-    
+    <p>Release Date: ${formatDate(movie.release_date)}</p>
     <p>TMDB Rating: ${movie.vote_average || 'N/A'}</p>
-    <p>${movie.overview ? movie.overview.substring(0, 100) + '...' : 'No overview available.'}</p>
+    <p>${truncateText(movie.overview)}</p>
     ${extra ? `
       <p>Director: ${extra.Director || 'N/A'}</p>
       <p>IMDB Rating: ${extra.imdbRating || 'N/A'}</p>
@@ -30,4 +30,22 @@ export function renderMovie(movie, container, extra = null) {
   });
 
   container.appendChild(card);
+}
+
+export function renderFavorites(container) {
+  const favorites = getFavorites();
+  if (favorites.length === 0) {
+    container.innerHTML = '<p>No favorites yet.</p>';
+    return;
+  }
+
+  favorites.forEach(movie => {
+    const card = document.createElement('div');
+    card.className = 'movie-card animate__animated animate__fadeIn';
+    card.innerHTML = `
+      <img src="${getPosterUrl(movie.poster)}" alt="${movie.title}">
+      <h3>${movie.title}</h3>
+    `;
+    container.appendChild(card);
+  });
 }
