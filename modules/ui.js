@@ -13,17 +13,21 @@ export function renderMovie(movie, container, extra = null) {
   card.innerHTML = `
     <img src="${getPosterUrl(movie.poster_path)}" alt="${movie.title}">
     <h3>${movie.title}</h3>
-    <p>Release Date: ${formatDate(movie.release_date)}</p>
-    <p>TMDB Rating: ${movie.vote_average || 'N/A'}</p>
+    <p><strong>Release Date:</strong> ${formatDate(movie.release_date)}</p>
+    <p><strong>TMDB Rating:</strong>  ${movie.vote_average || 'N/A'}</p>
     <p>${truncateText(movie.overview)}</p>
+    
     ${extra ? `
-      <p>Director: ${extra.Director || 'N/A'}</p>
-      <p>IMDB Rating: ${extra.imdbRating || 'N/A'}</p>
-      <p>Genre: ${extra.Genre || 'N/A'}</p>
+      <p><strong>Director:</strong> ${extra.Director || 'N/A'}</p>
+      <p><strong>IMDB Rating:</strong>  ${extra.imdbRating || 'N/A'}</p>
+      <p><strong>Genre:</strong> ${extra.Genre || 'N/A'}</p>
     ` : ''}
-    <button class="fav-btn">Add to Favorites</button>
+    <div class="card-actions">
+      <button class="fav-btn"> Add to Favorites</button>
+    </div>
   `;
 
+ 
   card.querySelector('.fav-btn').addEventListener('click', () => {
     addFavorite({ title: movie.title, poster: movie.poster_path });
     alert(`${movie.title} added to favorites!`);
@@ -45,6 +49,7 @@ export function renderFavorites(container) {
     card.innerHTML = `
       <img src="${getPosterUrl(movie.poster)}" alt="${movie.title}">
       <h3>${movie.title}</h3>
+      <p><em>Saved in Favorites</em></p>
     `;
     container.appendChild(card);
   });

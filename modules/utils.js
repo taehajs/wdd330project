@@ -1,9 +1,7 @@
-
 export function truncateText(text, maxLength = 100) {
   if (!text) return 'No description available.';
   return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
 }
-
 
 export function formatDate(dateString) {
   if (!dateString) return 'N/A';
@@ -14,7 +12,6 @@ export function formatDate(dateString) {
     day: 'numeric'
   });
 }
-
 
 export function getPosterUrl(path) {
   return path
